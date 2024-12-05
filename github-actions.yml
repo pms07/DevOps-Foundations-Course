@@ -1,5 +1,5 @@
 # TODO: Define the Workflow Name
-name: calculator-app-workflow
+name: calculator-app-workflow.
 
 # TODO: Define triggers for the workflow
 on:
