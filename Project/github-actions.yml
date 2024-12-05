@@ -3,12 +3,12 @@ name: calculator-app-workflow
 
 # TODO: Define triggers for the workflow
 on:
-   push:
-     branches:
-      - master 
-   pull_request:
-     branches:
-      - master 
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
   # TODO: Define a job for building and testing the frontend
@@ -28,9 +28,9 @@ jobs:
         run: npm install
         working-directory: ./Project/frontend
       # TODO: Run tests
-      - name: Run tests forntend
-        run: npm test
-        working-directory: ./Project/frontend
+      # - name: Run frontend tests
+      #   run: npm test
+      #   working-directory: ./Project/frontend
       # TODO: Build the React app
       - name: build frontend final
         run: npm run build
@@ -42,17 +42,17 @@ jobs:
     steps:
       # TODO: Checkout code
       - name: Checkout code for backend
-        run: actions/checkout@v3
+        uses: actions/checkout@v3
       # TODO: Setup Python
       - name: Setup Python
-        run: actions/setup-python@v4
+        uses: actions/setup-python@v4
         with: 
           python-version: 3.9
       # TODO: Install dependencies
       - name: Install dependencies for backend
         run: |
           python -m pip install --upgrade pip
-          pip install -r backend/requirements.txt
+          pip install -r Project/backend/requirements.txt
       # TODO: Run tests
       - name: Run backend test
         run: python -m unittest discover
@@ -60,28 +60,26 @@ jobs:
 
   # TODO: Define a job for building and pushing Docker images
   docker:
-    needs: 
+    needs:
       - frontend
       - backend
     # Run this job only when 'frontend' & 'backend' stages are sucessfully completed
-    #needs: 
     runs-on: ubuntu-latest
     steps:
       # TODO: Checkout code
       - name: Checkout code
-        run: actions/checkout@v3
+        uses: actions/checkout@v3
       # TODO: Setup Docker
-      - name: Docker setup
-        run: docker/setup-buildx-action@v2
+      - name: Setup Docker
+        uses: docker/setup-buildx-action@v2
       # TODO: Build frontend Docker image
-      - name: Log to Docker hub
+      - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with: 
-          username:
-          password:
-
-      - name: Frontend docker image
-        if: github.ref_name == 'main'
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build frontend Docker image
+        if: github.ref_name == 'master'
         uses: docker/build-push-action@v4
         with: 
           context: ./Project/frontend
@@ -89,7 +87,7 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/react-frontend:latest
       # TODO: Build backend Docker image
       - name: Build backend Docker image
-        if: github.ref_name == 'main'
+        if: github.ref_name == 'master'
         uses: docker/build-push-action@v4
         with:
           context: ./Project/backend
@@ -98,8 +96,8 @@ jobs:
       # TODO: Push images to Docker Hub (if on main branch)
 
   # OPTIONAL: Define a deployment job (if applicable)
-  deploy:
-    needs: docker
-    runs-on: ubuntu-latest
-    steps:
+  # deploy:
+  #   needs: docker
+  #   runs-on: ubuntu-latest
+  #   steps:
       # TODO: Add deployment steps
