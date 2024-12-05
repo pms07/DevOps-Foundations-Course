@@ -1,152 +1,79 @@
-## Multi-Container Docker Application with CI/CD: Calculator App Project
+# Multi-Container Docker Application with CI/CD: Calculator App Project
 
-#### Complete Project Instructions: [DevOps Foundations Course/Project](https://github.com/shiftkey-labs/DevOps-Foundations-Course/tree/master/Project)
+## Complete Project Instructions
+Refer to the complete project instructions here: [DevOps Foundations Course/Project](https://github.com/shiftkey-labs/DevOps-Foundations-Course/tree/master/Project)
 
-#### Submission by - **<FIRST_NAME> <LAST_NAME>**
+#### Submission by - *Pavankumar Sakhare *
 
-### Project Overview
+---
 
-- **Brief project description:** What is the purpose of your application?
+## Project Overview
 
-<!-- Include explanation here -->
-<!-- Include explanation here -->
-<!-- Include explanation here -->
-<!-- NOTE: It is not compulsory to include detailed explanations, writing succint concise points would also sufice. Make sure maintain readability and clarity. -->
+- *Brief project description:*
+  This project is a calculator application with a *React frontend* and a *Python Flask backend*. It is containerized using Docker, orchestrated with Docker Compose, and features a CI/CD pipeline for automation.
 
+- *implemention details:*
+  - *Frontend Dockerfile*: To containerize the React application.
+  - *Backend Dockerfile*: To containerize the Flask API.
+  - *Docker Compose YAML*: To set up and manage multi-container services.
+  - *GitHub Actions Workflow*: To automate CI/CD processes.
 
-- **Which files are you implmenting? and why?:**
+---
 
-<!-- Include explanation here -->
-<!-- Include explanation here -->
-<!-- Include explanation here -->
-<!-- NOTE: It is not compulsory to include detailed explanations, writing succint concise points would also sufice. Make sure maintain readability and clarity. -->
+## Docker Implementation
 
+### Backend Dockerfile
+- Uses python:3.9-slim as the base image.
+- Installs dependencies from requirements.txt.
+- Exposes port 5000 for the Flask API.
+- Runs the app using python app.py.
 
-- _**Any other explanations for personal note taking.**_
+### Frontend Dockerfile
+- Uses node:14-alpine as the base image.
+- Installs dependencies and builds the React app.
+- Exposes port 3000 for the React application.
+- Runs the app using npm start.
 
-<!-- Include explanation here -->
-<!-- Include explanation here -->
-<!-- Include explanation here -->
-<!-- NOTE: It is not compulsory to include detailed explanations, writing succint concise points would also sufice. Make sure maintain readability and clarity. -->
+---
 
+## Docker Compose Configuration
 
-### Docker Implementation
+- *Services*:
+  - *frontend*: React app, port 3000.
+  - *backend*: Flask API, port 5000.
 
-**Explain your Dockerfiles:**
+- *Networking*: Services communicate using Docker Compose’s default network.
 
-- **Backend Dockerfile** (Python API):
-    - Here please explain the `Dockerfile` created for the Python Backend API. 
-    - This can be a simple explanation which serves as a reference guide, or revision to you when read back the readme in future. 
+---
 
-<!-- Include explanation here -->
-<!-- Include explanation here -->
-<!-- Include explanation here -->
-<!-- NOTE: It is not compulsory to include detailed explanations, writing succint concise points would also sufice. Make sure maintain readability and clarity. -->
+## CI/CD Pipeline
 
-- **Frontend Dockerfile** (React App):
-    - Similar to the above section, please explain the Dockerfile created for the React Frontend Web Application. 
+### Workflow
+- *Triggers*: On push or pull_request to master branch.
+- *Stages*:
+  1. Build and push Docker images to Docker Hub.
+  2. Deploy Docker Compose configuration to the cloud.
 
-<!-- Include explanation here -->
-<!-- Include explanation here -->
-<!-- Include explanation here -->
-<!-- NOTE: It is not compulsory to include detailed explanations, writing succint concise points would also sufice. Make sure maintain readability and clarity. -->
+---
 
-**Use this section to document your choices and steps for building the Docker images.**
+## Lessons Learned
 
+- Docker containers provide a lightweight and isolated environment for development and deployment.
+- Docker Compose simplifies the management of multi-container services.
+- GitHub Actions provides a flexible and scalable CI/CD pipeline.
+- Docker ensures consistent environments across deployments.
+- CI/CD pipelines streamline and automate the development workflow.
 
-### Docker Compose YAML Configuration
+---
 
-**Break down your `docker-compose.yml` file:**
+## Future Improvements
 
-- **Services:** List the services defined. What do they represent?
-- **Networking:** How do the services communicate with each other?
-- **Volumes:** Did you use any volume mounts for persistent data?
-- **Environment Variables:** Did you define any environment variables for configuration? 
+- We can add more unit tests to the Flask API.
+- We can add integration tests to the frontend and backend.
+- We can add more complex calculations to the calculator app.
+- We can add a database to store user data.
+- We can add authentication and authorization to the Flask API.
+- Optimize Docker images using multi-stage builds.
+- Expand CI/CD to include automated deployment to the cloud.
 
-**Use this section to explain how your services interact and are configured within `docker-compose.yml`.**
-
-<!-- Include explanation here -->
-<!-- Include explanation here -->
-<!-- Include explanation here -->
-<!-- Include explanation here -->
-<!-- NOTE: It is not compulsory to include detailed explanations, writing succint concise points would also sufice. Make sure maintain readability and clarity. -->
-
-
-### CI/CD Pipeline (YAML Configuration)
-
-**Explain your CI/CD pipeline:**
-
-- What triggers the pipeline (e.g., push to main branch)?
-- What are the different stages (build, test, deploy)?
-- How are Docker images built and pushed to a registry (if applicable)?
-
-**Use this section to document your automated build and deployment process.**
-
-<!-- Include explanation here -->
-<!-- Include explanation here -->
-<!-- Include explanation here -->
-<!-- Include explanation here -->
-<!-- NOTE: It is not compulsory to include detailed explanations, writing succint concise points would also sufice. Make sure maintain readability and clarity. -->
-
-
-### CI/CD Pipeline (YAML Configuration)
-
-**Simply explain your CI/CD pipeline:**
-
-- What triggers the pipeline (e.g., push to main branch)?
-- What are the different stages (build, test, deploy)?
-- How are Docker images built and pushed to a registry?
-
-**Use this section to document your automated build, and docker process.**
-
-<!-- Include explanation here -->
-<!-- Include explanation here -->
-<!-- Include explanation here -->
-<!-- Include explanation here -->
-<!-- NOTE: It is not compulsory to include detailed explanations, writing succint concise points would also sufice. Make sure maintain readability and clarity. -->
-
-
-### Assumptions
-
-- List any assumptions you made while creating the Dockerfiles, `docker-compose.yml`, or CI/CD pipeline. 
-
-<!-- Include explanation here -->
-<!-- Include explanation here -->
-<!-- Include explanation here -->
-<!-- Include explanation here -->
-<!-- NOTE: It is not compulsory to include detailed explanations, writing succint concise points would also sufice. Make sure maintain readability and clarity. -->
-
-
-### Lessons Learned
-
-- What challenges did you encounter while working with Docker and CI/CD?
-- What did you learn about containerization and automation?
-
-**Use this section to reflect on your experience and learnings when implementing this project.**
-
-<!-- Include explanation here -->
-<!-- Include explanation here -->
-<!-- Include explanation here -->
-<!-- Include explanation here -->
-<!-- NOTE: It is not compulsory to include detailed explanations, writing succint concise points would also sufice. Make sure maintain readability and clarity. -->
-
-
-### Future Improvements
-
-- How could you improve your Dockerfiles, `docker-compose.yml`, or CI/CD pipeline? 
-- (Optional-Just for personal reflection) Are there any additional functionalities you would like to consider for the calculator application to crate more stages in the CI/CD pipeline or add additional configuration in the Dockerfiles?
-
-**Use this section to brainstorm ways to enhance your project.**
-
-<!-- Include explanation here -->
-<!-- Include explanation here -->
-<!-- Include explanation here -->
-<!-- Include explanation here -->
-<!-- NOTE: It is not compulsory to include detailed explanations, writing succint concise points would also sufice. Make sure maintain readability and clarity. -->
-
-
-
-
-
-
-<!-- BEST OF LUCK! -->
+---
